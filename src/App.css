@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+
+main {
+  border: 1px solid #bbb;
+  aspect-ratio: 9/16;
+  border-radius: 3px;
+  max-width: 375px;
+  width: 100vw;
+}
