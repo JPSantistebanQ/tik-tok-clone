@@ -1,11 +1,13 @@
 .App {
   text-align: center;
+  overflow: hidden;
 }
 
 main {
-  border: 1px solid #bbb;
   aspect-ratio: 9/16;
   border-radius: 3px;
+  overflow-y: scroll;
   max-width: 375px;
   width: 100vw;
+  scroll-snap-type: y mandatory;
 }

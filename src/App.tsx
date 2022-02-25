@@ -1,14 +1,15 @@
-import './App.css'
+import './App.css';
+
+import FeedVideos from './components/FeedVideos';
 
 function App() {
-
-  return (
-    <div className="App">
-      <main>
-      Tik tok clone
-      </main>
-    </div>
-  )
+    return (
+        <div className="App">
+            <main>
+                <FeedVideos></FeedVideos>
+            </main>
+        </div>
+    );
 }
 
-export default App
+export default App;

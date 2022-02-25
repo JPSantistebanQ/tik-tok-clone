@@ -16,6 +16,16 @@
   font-weight: 600;
 }
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   font-family: 'Proxima Nova', Arial, Tahoma, PingFangSC, sans-serif, 'Segoe UI Emoji', 'Noto Emoji';
