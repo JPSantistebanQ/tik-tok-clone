@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useRef, useState } from 'react';
 
 import styles from './styles.module.css';
+import VideoPlayerActions from './VideoPlayerActions';
 
 const VideoPlayer = ({ src }) => {
     const video = useRef(null);
@@ -30,6 +31,7 @@ const VideoPlayer = ({ src }) => {
                 Sorry, your browser doesn&apos;t support embedded videos.
             </video>
             <button className={playerClassName} onClick={handlePlay}></button>
+            <VideoPlayerActions></VideoPlayerActions>
         </div>
     );
 };
