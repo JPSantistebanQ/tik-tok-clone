@@ -1,15 +1,16 @@
 import clsx from 'clsx';
-import { useRef, useState } from 'react';
+import {useRef, useState} from 'react';
 
+import VideoDescription from '../VideoDescription';
 import styles from './styles.module.css';
 import VideoPlayerActions from './VideoPlayerActions';
 
-const VideoPlayer = ({ src }) => {
+const VideoPlayer = ({albumCover, author, description, src, songTitle}) => {
     const video = useRef(null);
     const [playing, setPlaying] = useState(false);
 
     const handlePlay = () => {
-        const { current: videoEl } = video;
+        const {current: videoEl} = video;
         !playing ? videoEl.play() : videoEl.pause();
         setPlaying(!playing);
     };
@@ -31,7 +32,13 @@ const VideoPlayer = ({ src }) => {
                 Sorry, your browser doesn&apos;t support embedded videos.
             </video>
             <button className={playerClassName} onClick={handlePlay}></button>
-            <VideoPlayerActions></VideoPlayerActions>
+            <VideoPlayerActions />
+            <VideoDescription
+                albumCover={albumCover}
+                author={author}
+                description={description}
+                songTitle={songTitle}
+            />
         </div>
     );
 };
