@@ -1,3 +1,6 @@
+import {useEffect} from 'react';
+
+import {getVideos} from '../../services';
 import VideoPlayer from '../VideoPlayer';
 import styles from './styles.module.css';
 
@@ -56,6 +59,13 @@ const VIDEOS = [
     },
 ];
 const FeedVideos = () => {
+    useEffect(() => {
+        getVideos().then(([error, videos]) => {
+            console.log('videos: ', videos);
+        });
+        return () => {};
+    }, []);
+
     return VIDEOS.map((video) => (
         <div className={styles.item} key={video.id}>
             <VideoPlayer {...video} />
