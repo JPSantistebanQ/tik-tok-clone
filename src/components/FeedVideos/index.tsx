@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
 import {getVideos} from '../../services';
 import VideoPlayer from '../VideoPlayer';
@@ -59,17 +59,30 @@ const VIDEOS = [
     },
 ];
 const FeedVideos = () => {
+    const [videos, setVideos] = useState([]);
+    const [error, setError] = useState(null);
+
     useEffect(() => {
-        getVideos().then(([error, videos]) => {
-            console.log('videos: ', videos);
+        getVideos().then(([errorData, videosData]) => {
+            if (error) return setError(errorData);
+            setVideos(videosData);
         });
         return () => {};
     }, []);
 
-    return VIDEOS.map((video) => (
-        <div className={styles.item} key={video.id}>
-            <VideoPlayer {...video} />
-        </div>
-    ));
+    if (error) return <span>{error}</span>;
+
+    return videos.map((video) => {
+        const {
+            user: {avatar, username},
+        } = video;
+        console.log('video: ', video);
+
+        return (
+            <div className={styles.item} key={video.id}>
+                <VideoPlayer {...video} avatar={avatar} username={username} />
+            </div>
+        );
+    });
 };
 export default FeedVideos;

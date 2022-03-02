@@ -1,19 +1,25 @@
 import clsx from 'clsx';
-import {useRef, useState} from 'react';
+import {useRef} from 'react';
 
+import useIntersectionVideoPlayer from '../../hooks/useIntersectionVideoPlayer';
 import VideoDescription from '../VideoDescription';
 import styles from './styles.module.css';
 import VideoPlayerActions from './VideoPlayerActions';
 
-const VideoPlayer = ({albumCover, author, description, src, songTitle}) => {
+const VideoPlayer = ({
+    albumCover,
+    username,
+    avatar,
+    description,
+    src,
+    songTitle,
+    comments,
+    likes,
+    messages,
+    shares,
+}) => {
     const video = useRef(null);
-    const [playing, setPlaying] = useState(false);
-
-    const handlePlay = () => {
-        const {current: videoEl} = video;
-        !playing ? videoEl.play() : videoEl.pause();
-        setPlaying(!playing);
-    };
+    const {playing, handlePlay} = useIntersectionVideoPlayer({video});
 
     const playerClassName = clsx(styles.player, {
         [styles.hidden]: playing,
@@ -31,11 +37,24 @@ const VideoPlayer = ({albumCover, author, description, src, songTitle}) => {
                 <track default kind="captions" />
                 Sorry, your browser doesn&apos;t support embedded videos.
             </video>
-            <button className={playerClassName} onClick={handlePlay}></button>
-            <VideoPlayerActions />
+            <i
+                className={playerClassName}
+                onClick={handlePlay}
+                onKeyDown={handlePlay}
+                role="button"
+                tabIndex={0}
+            />
+            <VideoPlayerActions
+                avatar={avatar}
+                username={username}
+                comments={comments}
+                likes={likes}
+                messages={messages}
+                shares={shares}
+            />
             <VideoDescription
                 albumCover={albumCover}
-                author={author}
+                username={username}
                 description={description}
                 songTitle={songTitle}
             />
