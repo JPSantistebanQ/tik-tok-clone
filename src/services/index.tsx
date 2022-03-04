@@ -27,3 +27,21 @@ export const uploadVideo = async ({videoFile}) => {
     const file = data?.Key ? `${prefix}${data.Key}` : '';
     return [error, file];
 };
+
+export const publishVideo = async ({videoSrc, description}) => {
+    const defaultAlbum =
+        'https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/81fd9366b0f1841e1e6990492b5c9004~c5_720x720.jpeg?x-expires=1632060000&x-signature=lJ7S3aE3YqHr8WbhkwXNIasqkZo%3D';
+    const defaultSong = 'jpsantq songs';
+
+    const {data, error} = await supabase.from('videos').insert([
+        {
+            user_id: '54f876df-fec6-4da7-a1ba-6210ea0f1760',
+            description,
+            albumCover: defaultAlbum,
+            songTitle: defaultSong,
+            src: videoSrc,
+        },
+    ]);
+
+    return [error, data];
+};

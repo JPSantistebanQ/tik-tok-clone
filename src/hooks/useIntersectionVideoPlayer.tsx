@@ -23,12 +23,6 @@ const useIntersectionVideoPlayer = ({video}) => {
 
         observer.observe(video.current);
         video.current._handleIntersect = (isIntersecting) => {
-            console.log(
-                '_handleIntersect',
-                video.current,
-                ', isIntersecting: ',
-                isIntersecting,
-            );
             const {current: videoEl} = video;
 
             isIntersecting ? videoEl.play() : videoEl.pause();
@@ -39,7 +33,6 @@ const useIntersectionVideoPlayer = ({video}) => {
     }, [video.current]);
 
     const handlePlay = () => {
-        console.log('handlePlay');
         const {current: videoEl} = video;
         playing ? videoEl.pause() : videoEl.play();
 

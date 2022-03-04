@@ -2,18 +2,30 @@ import clsx from 'clsx';
 import {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 
+import {publishVideo, uploadVideo} from '../../services';
 import styles from './styles.module.css';
 
 const Upload = () => {
     const [uploading, setUploading] = useState(false);
     const [uploaded, setUploaded] = useState(null);
 
-    const onDrop = () => {
-        console.log('onDrop');
+    const onDrop = async (files) => {
+        const [file] = files;
+        setUploading(true);
+        const [error, fileUrl] = await uploadVideo({videoFile: file});
+        if (error) return console.error(error);
+        setUploaded(fileUrl);
     };
 
-    const handleSubmit = () => {
-        console.log('handleSubmit');
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
+        if (!uploaded) return;
+
+        const description = evt.target.description.value;
+        const [error] = await publishVideo({videoSrc: uploaded, description});
+
+        if (error) return console.error(error);
+        else console.log('video published!!!');
     };
 
     const {isDragAccept, isDragReject, getRootProps, getInputProps} =
