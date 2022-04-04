@@ -1,6 +1,4 @@
-import PropTypes, { InferProps } from 'prop-types';
-
-import { supabase } from './supabase';
+import supabase from './supabase';
 
 const prefix = import.meta.env.VITE_SUPABASE_STORAGE_URL;
 
@@ -19,7 +17,9 @@ export const getVideos = async () => {
   return [error, data];
 };
 
-export const uploadVideo = async ({ videoFile }) => {
+type UploadVideoProps = { videoFile: string | any };
+
+export const uploadVideo = async ({ videoFile }: UploadVideoProps) => {
   const filename = window.crypto.randomUUID();
 
   const { data, error } = await supabase.storage
@@ -30,17 +30,15 @@ export const uploadVideo = async ({ videoFile }) => {
   return [error, file];
 };
 
-const PublishVideoPropTypes = {
-  videoSrc: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+type PublishVideoPropTypes = {
+  videoSrc: string | Error;
+  description: string;
 };
 
-type PublishVideoTypes = InferProps<typeof PublishVideoPropTypes>;
-
-export const publishVideo: React.FC<PublishVideoTypes> = async ({
+export const publishVideo = async ({
   videoSrc,
   description,
-}) => {
+}: PublishVideoPropTypes) => {
   const defaultAlbum =
     'https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/81fd9366b0f1841e1e6990492b5c9004~c5_720x720.jpeg?x-expires=1632060000&x-signature=lJ7S3aE3YqHr8WbhkwXNIasqkZo%3D';
   const defaultSong = 'jpsantq songs';

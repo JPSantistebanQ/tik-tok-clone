@@ -51,7 +51,18 @@ module.exports = {
     //     usePrettierrc: true,
     //   },
     // ],
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'no-underscore-dangle': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    'no-param-reassign': 'off',
+    'no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
+    'react-hooks/rules-of-hooks': 'off',
     'react/function-component-definition': [
       'error',
       {
